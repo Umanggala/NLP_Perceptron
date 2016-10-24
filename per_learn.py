@@ -3,6 +3,7 @@ import sys
 
 filename = sys.argv[-1]
 #/Users/umanggala/Desktop/Courses/NLP/NLP_Email_Classification
+target = open("/Users/umanggala/Desktop/Courses/NLP/NLP_Perceptron" + "/nbmodel.txt", 'w')
 
 class input_processing:
     def __init__(self, dir):
@@ -81,5 +82,13 @@ bias = 0
 for i in range (0,20):
     weight_words,bias = calculating.calculate_perceptron(probability_words,weight_words,bias)
 
-print(bias)
+target.write(str(bias))
+target.write("\n")
 
+for i in weight_words:
+    target.write(i)
+    target.write("\t")
+    target.write(str (weight_words.get(i)))
+    target.write("\n")
+
+target.close()
