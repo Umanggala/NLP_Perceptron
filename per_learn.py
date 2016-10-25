@@ -1,5 +1,5 @@
 import glob, os
-import sys
+import sys, random
 
 filename = sys.argv[-1]
 #/Users/umanggala/Desktop/Courses/NLP/NLP_Email_Classification
@@ -9,10 +9,10 @@ class input_processing:
     def __init__(self, dir):
         self.dir = dir
 
-    def calculate_perceptron(self,new_dict,new_dict_1,bias):
+    def calculate_perceptron(self,new_dict,new_dict_1,bias,my_list):
 
 
-        for count in new_dict:
+        for count in my_list:
             sum_xd_wd = 0
             weight_dict = new_dict_1
             alpha = 0
@@ -72,15 +72,17 @@ class input_processing:
 
 
 
-        return new_dict,weights
+        return new_dict,weights,count
 
 calculating = input_processing(filename+"/train")
 
-probability_words,weight_words= calculating.extract_token()
+probability_words,weight_words,count= calculating.extract_token()
 bias = 0
+my_list=list(range(1,count+1))
 
 for i in range (0,20):
-    weight_words,bias = calculating.calculate_perceptron(probability_words,weight_words,bias)
+    random.shuffle(my_list)
+    weight_words,bias = calculating.calculate_perceptron(probability_words,weight_words,bias,my_list)
 
 target.write(str(bias))
 target.write("\n")
