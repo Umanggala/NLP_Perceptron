@@ -9,11 +9,11 @@ newDict = {}
 with open("/Users/umanggala/Desktop/Courses/NLP/NLP_Perceptron" + '/nbmodel.txt') as f:
 
     bias1 = f.readline()
-    bias = int(bias1)
+    bias = float(bias1)
 
     for line in f:
         splitLine = line.split()
-        newDict[splitLine[0]] = int(splitLine[1])
+        newDict[splitLine[0]] = float(splitLine[1])
 
 f.close()
 
